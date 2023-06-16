@@ -4,15 +4,17 @@ import {useAppStore} from '@/store/app'
 
 const updateSlashCommands = async (commands) => {
 	const rest = new REST({version: 10}).setToken(process.env.TOKEN)
-	const result = await rest.put(
-		Routes.applicationGuildCommands(
-			process.env.APPLICATION_ID,
-			process.env.GUILD_ID,
-		),
-		{
-			body:commands,
-		},
-	)
+	for(let i=0;i<JSON.parse(process.env.GUILD_ID).list.length;i++){
+		await rest.put(
+			Routes.applicationGuildCommands(
+				process.env.APPLICATION_ID,
+				JSON.parse(process.env.GUILD_ID).list[i],
+			),
+			{
+				body:commands,
+			},
+		)
+	}
 }
 
 export const loadCommands = async() => {

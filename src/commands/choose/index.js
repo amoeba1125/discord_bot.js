@@ -14,7 +14,7 @@ export const command = new SlashCommandBuilder()
 export const action = async(ctx)=>{
 	const { commandName, options } = ctx;
 	await ctx.deferReply({ ephemeral: options.getBoolean('隱藏') });
-	const inputList = ctx.options.get('選項').value.split(/\s+/);
+	const inputList = options.get('選項').value.split(/\s+/);
 	let outputStr = '選項：';
 	for(var i=0;i<inputList.length;i++){
 		if(i != 0)
